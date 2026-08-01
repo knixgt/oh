@@ -1,0 +1,954 @@
+/* =========================================================
+   1989 (TAYLOR'S VERSION) THEME
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   THEME VARIABLES
+   --------------------------------------------------------- */
+
+body[data-theme="1989"] {
+  --tv-sky: #7dd3fc;
+  --tv-seaglass: #5ab1bb;
+  --tv-cream: #fdfcf8;
+  --tv-text: #2c3e50;
+  --tv-white: rgba(255, 255, 255, 0.9);
+  --tv-muted: rgba(44, 62, 80, 0.5);
+
+  color: var(--tv-text);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #e0f2fe 0%,
+      #fefce8 50%,
+      #bae6fd 100%
+    );
+
+  transition:
+    background 500ms ease,
+    color 500ms ease;
+}
+
+
+/* =========================================================
+   PLAYER
+   ========================================================= */
+
+body[data-theme="1989"] .player {
+  position: relative;
+  overflow: hidden;
+  
+
+  border: 0;
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.52),
+      rgba(255, 255, 255, 0.34)
+    );
+
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  box-shadow:
+    0 20px 50px rgba(125, 211, 252, 0.22),
+    inset 0 0 20px rgba(255, 255, 255, 0.28);
+
+  transition:
+    background 500ms ease,
+    border-color 500ms ease,
+    border-radius 500ms ea\se,
+    box-shadow 500ms ease;
+}
+
+
+/* subtle paper / cloudy texture */
+
+body[data-theme="1989"] .player::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    url("../assets/backgrounds/t19-back.jpg")
+    center / cover
+    no-repeat;
+
+  opacity: 0.75;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+body[data-theme="1989"] .player::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 2%,
+            rgba(0,0,0,0.35) 100%
+        );
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* keep normal player content above theme texture */
+
+body[data-theme="1989"] .player > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+body[data-theme="1989"] .theme-title {
+  display: flex;
+
+  align-items: center;
+  gap: 8px;
+
+  color: rgba(44, 62, 80, 0.7);
+
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+
+/* If you have the Hunger Games sector footer label */
+
+body[data-theme="1989"] .theme-sector-label {
+  display: block;
+
+  color: rgba(44, 62, 80, 0.35);
+
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   ALBUM ART SECTION
+   ========================================================= */
+
+body[data-theme="1989"] .artwork-section {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  margin-top: 8px;
+}
+
+
+/* Polaroid-style artwork */
+
+body[data-theme="1989"] .artwork-wrapper {
+  position: relative;
+
+  width: min(100%, 315px);
+  aspect-ratio: 1;
+
+  overflow: visible;
+
+  border-radius: 0;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  padding:
+    12px
+    12px
+    40px
+    12px;
+
+  transform: rotate(2deg);
+
+  box-shadow:
+    0 16px 40px rgba(125, 211, 252, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 500ms ease,
+    box-shadow 500ms ease;
+}
+
+
+body[data-theme="1989"] .artwork-wrapper:hover {
+  transform:
+    rotate(1deg)
+    translateY(-3px);
+
+  box-shadow:
+    0 20px 50px rgba(125, 211, 252, 0.35),
+    0 10px 28px rgba(0, 0, 0, 0.14);
+}
+
+
+/* Album artwork itself */
+
+body[data-theme="1989"] .album-artwork {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 0;
+
+  transition:
+    opacity 250ms ease,
+    transform 700ms ease;
+}
+
+
+body[data-theme="1989"] .artwork-wrapper:hover .album-artwork {
+  transform: scale(1.045);
+}
+
+
+/* optional faint glaze over artwork */
+
+body[data-theme="1989"] .artwork-wrapper::before {
+  content: "";
+
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+  bottom: 40px;
+  left: 12px;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.025),
+      transparent 50%
+    );
+
+  pointer-events: none;
+  z-index: 3;
+}
+
+
+/* TS signature-like decorative mark */
+
+body[data-theme="1989"] .artwork-wrapper::after {
+  content: "T.S.";
+
+  position: absolute;
+
+  right: 16px;
+  bottom: 7px;
+
+  color: rgba(90, 177, 187, 0.65);
+
+  font-family: "Libre Caslon Text", Georgia, serif;
+  font-size: 19px;
+  font-style: italic;
+
+  transform: rotate(-12deg);
+
+  pointer-events: none;
+  z-index: 4;
+}
+
+
+/* =========================================================
+   ARTWORK PLACEHOLDER
+   ========================================================= */
+
+body[data-theme="1989"] .artwork-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #dff4ff,
+      #fdfcf8
+    );
+
+  color: var(--tv-seaglass);
+
+  font-size: 42px;
+}
+
+
+/* =========================================================
+   TRACK INFO
+   ========================================================= */
+
+body[data-theme="1989"] .track-title {
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+
+  color: #f7f4e8;
+
+  text-shadow:
+    0.4px 0 rgba(255, 255, 255, 0.35),
+    -0.4px 0 rgba(255, 255, 255, 0.25),
+    0 0 2px rgba(255, 255, 255, 0.25);
+
+  letter-spacing: 0.03em;
+}
+
+
+body[data-theme="1989"] .artist-name {
+  color: var(--tv-seaglass);
+
+  font-family:
+    "Inter",
+    sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  text-align: center;
+
+  opacity: 0.86;
+}
+
+
+/* If your actual classes are different, you can also target IDs */
+
+body[data-theme="1989"] #track-title {
+  color: var(--tv-text);
+
+  font-family:
+    "Libre Caslon Text",
+    Georgia,
+    serif;
+}
+
+
+body[data-theme="1989"] #artist-name {
+  color: var(--tv-seaglass);
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+body[data-theme="1989"] .progress-container,
+body[data-theme="1989"] .progress-track {
+  background: rgba(255, 255, 255, 0.42);
+
+  border-radius: 999px;
+}
+
+
+/* progress fill */
+
+body[data-theme="1989"] .progress-fill {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: var(--tv-sky);
+
+  box-shadow:
+    0 0 12px rgba(125, 211, 252, 0.55);
+
+  opacity: 0.92;
+}
+
+
+/* shimmer */
+
+body[data-theme="1989"] .progress-fill::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 50%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
+
+  animation:
+    tv-progress-shimmer
+    3s
+    linear
+    infinite;
+}
+
+
+@keyframes tv-progress-shimmer {
+  100% {
+    left: 200%;
+  }
+}
+
+
+/* =========================================================
+   TIME LABELS
+   ========================================================= */
+
+body[data-theme="1989"] .current-time,
+body[data-theme="1989"] .duration,
+body[data-theme="1989"] .time-label {
+  color: rgba(44, 62, 80, 0.48);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   PREVIOUS / NEXT CONTROLS
+   ========================================================= */
+
+body[data-theme="1989"] .control-button {
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+
+  color: rgba(44, 62, 80, 0.55);
+  background: rgba(255, 255, 255, 0.52);
+
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.75),
+    0 4px 12px rgba(125, 211, 252, 0.14);
+
+  transform: translateY(0) scale(1);
+
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 280ms ease,
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body[data-theme="1989"] .control-button:hover {
+  color: var(--tv-seaglass);
+
+  border-color: rgba(125, 211, 252, 0.8);
+  background: rgba(255, 255, 255, 0.72);
+
+  transform:
+    translateY(-2px)
+    scale(1.1);
+
+  box-shadow:
+    0 6px 16px rgba(125, 211, 252, 0.24),
+    0 0 10px rgba(125, 211, 252, 0.18);
+  transform: scale(1)
+}
+
+body[data-theme="1989"] .control-button:active {
+  transform: scale(1);
+
+  transition-duration: 100ms;
+}
+
+/* =========================================================
+   TRACK METADATA
+   ========================================================= */
+
+body[data-theme="1989"]
+.song-title,
+body[data-theme="1989"]
+#song-title {
+  font-family: "Schoolbell", cursive;
+  font-weight: 1000;
+
+  color: white;
+
+  font-size: 18px;
+
+  letter-spacing: 0.03em;
+
+  text-shadow:
+    0.4px 0 rgba(255, 255, 255, 0.35),
+    -0.4px 0 rgba(255, 255, 255, 0.25),
+    0 0 2px rgba(255, 255, 255, 0.25);
+
+  animation:
+    tv-title-glow
+    4s ease-in-out infinite;
+}
+
+
+body[data-theme="1989"]
+.artist-name,
+body[data-theme="1989"]
+#artist-name,
+body[data-theme="1989"]
+.artist {
+  color: #3e4348;
+
+  font-family:
+    "Inter",
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  letter-spacing: 0.09em;
+
+  opacity: 1;
+}
+
+
+body[data-theme="1989"]
+.album-name,
+body[data-theme="1989"]
+#album-name,
+body[data-theme="1989"]
+.album {
+  color: var(--tv-muted);
+
+  font-family:
+    "Inter",
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: bold;
+
+  letter-spacing: 0.07em;
+}
+
+
+/* =========================================================
+   PROGRESS SLIDER
+   ========================================================= */
+
+body[data-theme="1989"]
+.progress-slider {
+  width: 100%;
+  height: 6px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.7);
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--tv-sky) 0%,
+      var(--tv-sky)
+        var(--slider-progress, 0%),
+      rgba(255, 255, 255, 0.4)
+        var(--slider-progress, 0%),
+      rgba(255, 255, 255, 0.4) 100%
+    );
+
+  box-shadow:
+    inset 0 1px 3px rgba(44, 62, 80, 0.12),
+    0 0 10px rgba(125, 211, 252, 0.28);
+
+  cursor: pointer;
+}
+
+
+body[data-theme="1989"]
+.progress-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 12px;
+  height: 12px;
+
+  border:
+    2px solid rgba(255, 255, 255, 0.95);
+
+  border-radius: 50%;
+
+  background:
+    var(--tv-seaglass);
+
+  box-shadow:
+    0 0 9px rgba(90, 177, 187, 0.55);
+
+  cursor: pointer;
+}
+
+
+/* Firefox support */
+
+body[data-theme="1989"]
+.progress-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  border:
+    2px solid rgba(255, 255, 255, 0.95);
+
+  border-radius: 50%;
+
+  background:
+    var(--tv-seaglass);
+
+  box-shadow:
+    0 0 9px rgba(90, 177, 187, 0.55);
+}
+
+
+/* =========================================================
+   TIME LABELS
+   ========================================================= */
+
+body[data-theme="1989"]
+.current-time,
+body[data-theme="1989"]
+.duration,
+body[data-theme="1989"]
+#current-time,
+body[data-theme="1989"]
+#duration,
+body[data-theme="1989"]
+.time {
+  color: white;
+
+  font-family:
+    "Inter",
+    sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT CONTROLS
+   ========================================================= */
+
+body[data-theme="1989"]
+.control-button,
+body[data-theme="1989"]
+.control-btn,
+body[data-theme="1989"]
+#previous-button,
+body[data-theme="1989"]
+#next-button {
+  border:
+    1px solid rgb(255, 255, 255);
+
+  border-radius: 50%;
+
+  color:
+    rgba(44, 62, 80, 0.55);
+
+  background:
+    rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.75),
+    0 4px 12px rgba(125, 211, 252, 0.14);
+
+  transition:
+    color 250ms ease,
+    border-color 250ms ease,
+    box-shadow 300ms ease,
+    background 300ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+body[data-theme="1989"]
+.control-button:hover,
+body[data-theme="1989"]
+.control-btn:hover,
+body[data-theme="1989"]
+#previous-button:hover,
+body[data-theme="1989"]
+#next-button:hover {
+  color: var(--tv-seaglass);
+
+  border-color:
+    rgb(84, 197, 250);
+
+  background:
+    rgb(255, 255, 255);
+
+  box-shadow:
+    0 0 12px rgba(125, 211, 252, 0.32);
+}
+
+
+body[data-theme="1989"]
+.control-button:active,
+body[data-theme="1989"]
+.control-btn:active,
+body[data-theme="1989"]
+#previous-button:active,
+body[data-theme="1989"]
+#next-button:active {
+  transform: scale(1);
+
+  box-shadow:
+    inset 0 2px 5px rgba(44, 62, 80, 0.12);
+}
+
+
+/* =========================================================
+   PLAY / PAUSE BUTTON
+   ========================================================= */
+
+body[data-theme="1989"]
+.play-button,
+body[data-theme="1989"]
+#play-pause-button,
+body[data-theme="1989"]
+#play-pause-button {
+  border:
+    2px solid rgba(125, 211, 252, 0.8);
+  
+  animation:
+    tv-control-pulse
+    3.2s ease-in-out infinite;
+
+  border-radius: 50%;
+
+  color: var(--tv-seaglass);
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 0 16px rgba(125, 211, 252, 0.3),
+    inset 1px 1px rgba(255, 255, 255, 0.9);
+
+  transition:
+    color 250ms ease,
+    border-color 250ms ease,
+    box-shadow 300ms ease,
+    background 300ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+body[data-theme="1989"]
+.play-button:hover,
+body[data-theme="1989"]
+#play-pause-button:hover,
+body[data-theme="1989"]
+#play-pause-button:hover {
+  color: #36c6da;
+  transform: scale(0.98);
+
+  background:
+    rgba(240, 249, 255, 0.75);
+
+  box-shadow:
+    0 0 22px rgba(125, 211, 252, 0.48),
+    inset 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+
+body[data-theme="1989"]
+.play-button:active,
+body[data-theme="1989"]
+#play-pause-button:active,
+body[data-theme="1989"]
+#play-pause-button:active {
+  transform: scale(0.93);
+}
+
+
+/* =========================================================
+   STATUS BAR
+   ========================================================= */
+
+
+body[data-theme="1989"] .status-dot.playing {
+  background: #7dd3fc;
+
+  box-shadow:
+    0 0 0 3px rgba(125, 211, 252, 0.15),
+    0 0 12px rgba(125, 211, 252, 0.75);
+}
+
+body[data-theme="1989"] .status-dot.paused {
+  background: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.15),
+    0 0 12px rgba(255, 255, 255, 0.75);
+}
+
+body[data-theme="1989"]
+.playback-status,
+body[data-theme="1989"]
+#playback-status {
+  color: white;
+
+  font-family: "Schoolbell", cursive;
+
+  font-size: 8px;
+  font-weight: 300;
+
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   HIDDEN ELEMENTS FROM OTHER THEMES
+   ========================================================= */
+
+/* Hunger Games-only decoration */
+
+body[data-theme="1989"] .theme-texture,
+body[data-theme="1989"] .theme-scanline,
+body[data-theme="1989"] .theme-rivet {
+  display: none;
+}
+
+
+/* =========================================================
+   GENERAL BUTTON CLEANUP
+   ========================================================= */
+
+body[data-theme="1989"] button {
+  cursor: pointer;
+}
+
+
+
+body[data-theme="1989"] .theme-title {
+  display: none;
+}
+
+
+/* =========================================================
+   1989 WINDOW CONTROLS
+   ========================================================= */
+
+body[data-theme="1989"] .title-bar {
+  position: relative;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+}
+
+body[data-theme="1989"] .window-controls {
+  position: relative;
+  z-index: 101;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-left: auto;
+
+  opacity: 1;
+  visibility: visible;
+}
+
+body[data-theme="1989"] .window-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  color: #2c3e50;
+
+  font-size: 20px;
+  line-height: 1;
+
+  opacity: 1;
+  visibility: visible;
+
+  -webkit-app-region: no-drag;
+
+  cursor: pointer;
+}
+
+body[data-theme="1989"] .window-button:hover {
+  background: rgba(255, 255, 255, 0.75);
+  transform: scale(1);
+}
+
+body[data-theme="1989"] #close-button:hover {
+  color: #d64b4b;
+  background: rgba(255, 100, 100, 0.18);
+}
+
+body[data-theme="1989"] .theme-sector-label{
+  display: none;
+}
+
+
+
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-theme="1989"]
+  .theme-scanline,
+
+  body[data-theme="1989"]
+  .status-dot,
+
+  body[data-theme="1989"]
+  .song-title,
+
+  body[data-theme="1989"]
+  #song-title,
+
+  body[data-theme="1989"]
+  .play-button,
+
+  body[data-theme="1989"]
+  #play-pause-button,
+
+  body[data-theme="1989"]
+  #play-pause-button {
+    animation: none;
+  }
+}

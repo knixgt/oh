@@ -1,0 +1,1095 @@
+/* =========================================================
+   OHHH — HUNGER GAMES THEME
+   Activated by:
+   <body data-theme="hunger-games">
+   ========================================================= */
+
+body[data-theme="hunger-games"] {
+  --hg-background: #050505;
+  --hg-surface: #131313;
+  --hg-surface-low: #0e0e0e;
+  --hg-surface-mid: #201f1f;
+  --hg-surface-high: #2a2a2a;
+  --hg-surface-highest: #353534;
+
+  --hg-gold: #ffb800;
+  --hg-gold-bright: #ffba20;
+  --hg-gold-light: #ffdca1;
+
+  --hg-border: #514532;
+  --hg-border-light: #75674f;
+
+  --hg-text: #e5e2e1;
+  --hg-text-muted: #d5c4ab;
+  --hg-text-dark: #9e8f78;
+
+  background:
+    radial-gradient(
+      circle at 50% 5%,
+      rgba(255, 184, 0, 0.08),
+      transparent 42%
+    ),
+    var(--hg-background);
+
+  color: var(--hg-text);
+}
+
+
+
+/* =========================================================
+   PLAYER CASING
+   ========================================================= */
+
+body[data-theme="hunger-games"] .player {
+  position: relative;
+  overflow: hidden;
+
+  border: 3px solid var(--hg-border);
+  border-radius: 0;
+
+  background-color: var(--hg-surface);
+
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    linear-gradient(
+      180deg,
+      #1a1a1a 0%,
+      #0d0d0d 100%
+    );
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.78),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    inset 0 -20px 30px rgba(0, 0, 0, 0.3);
+
+  transition:
+    background 500ms ease,
+    border-color 500ms ease,
+    border-radius 500ms ease,
+    box-shadow 500ms ease;
+}
+
+body[data-theme="hunger-games"] .player::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: url("../assets/backgrounds/hg-back.jpg")
+                center/cover no-repeat;
+
+    opacity: 0.25;     
+
+    z-index: 0;
+}
+
+body[data-theme="hunger-games"] .player::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 55%,
+            rgba(0,0,0,0.25) 100%
+        );
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+/*
+  All normal player content needs to sit above
+  the grain and texture effects.
+*/
+
+body[data-theme="hunger-games"] .player > *:not(
+  .theme-texture,
+  .theme-scanline,
+  .theme-rivet
+) {
+  position: relative;
+  z-index: 3;
+}
+
+
+/* =========================================================
+   METAL GRAIN
+   ========================================================= */
+
+body[data-theme="hunger-games"] .theme-texture {
+  display: block;
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+
+  opacity: 0.055;
+  mix-blend-mode: screen;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================================
+   MOVING SCANLINE
+   ========================================================= */
+
+body[data-theme="hunger-games"] .theme-scanline {
+  display: block;
+
+  position: absolute;
+  top: -10px;
+  left: 0;
+  z-index: 8;
+
+  width: 100%;
+  height: 2px;
+
+  pointer-events: none;
+
+  background: rgba(255, 184, 0, 0.11);
+
+  box-shadow:
+    0 0 8px rgba(255, 184, 0, 0.15),
+    0 4px 18px rgba(255, 184, 0, 0.04);
+
+  animation:
+    hunger-games-scanline 8s linear infinite;
+}
+
+
+/* =========================================================
+   OUTER RIVETS
+   ========================================================= */
+
+body[data-theme="hunger-games"] .theme-rivet {
+  display: block;
+
+  position: absolute;
+  z-index: 10;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #8a795d 0%,
+      rgb(77, 50, 7) 40%,
+      #000000 100%
+    );
+
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.1),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.9);
+
+  pointer-events: none;
+}
+
+body[data-theme="hunger-games"]
+.theme-rivet-top-left {
+  top: 8px;
+  left: 8px;
+}
+
+body[data-theme="hunger-games"]
+.theme-rivet-top-right {
+  top: 8px;
+  right: 8px;
+}
+
+body[data-theme="hunger-games"]
+.theme-rivet-bottom-left {
+  bottom: 8px;
+  left: 8px;
+}
+
+body[data-theme="hunger-games"]
+.theme-rivet-bottom-right {
+  right: 8px;
+  bottom: 8px;
+}
+
+
+/* =========================================================
+   TITLE BAR
+   ========================================================= */
+
+body[data-theme="hunger-games"] .title-bar {
+  min-height: 38px;
+
+  border-bottom:
+    2px solid var(--hg-border);
+
+  border-radius: 0;
+
+  background:
+    transparent;
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 -1px rgba(0, 0, 0, 0.85);
+}
+
+
+/* Hide the ordinary application title */
+
+body[data-theme="hunger-games"] .app-name {
+  display: none;
+}
+
+
+/* Show District Audio Feed title */
+
+body[data-theme="hunger-games"] .theme-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--hg-gold-light);
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 7px rgba(255, 184, 0, 0.35);
+}
+
+
+/* Small rivet beside the title */
+
+body[data-theme="hunger-games"]
+.theme-title-rivet {
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--hg-border);
+
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.8),
+    0.5px 0.5px rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================================
+   WINDOW BUTTONS
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.window-controls button,
+body[data-theme="hunger-games"]
+.window-button,
+body[data-theme="hunger-games"]
+.window-control {
+  color: var(--hg-gold-light);
+
+  border: 0;
+  border-radius: 0;
+
+  background: transparent;
+
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    transform 100ms ease;
+}
+
+body[data-theme="hunger-games"]
+.window-controls button:hover,
+body[data-theme="hunger-games"]
+.window-button:hover,
+body[data-theme="hunger-games"]
+.window-control:hover {
+  color: var(--hg-gold);
+
+  background:
+    rgba(255, 184, 0, 0.09);
+}
+
+body[data-theme="hunger-games"]
+.window-controls button:active,
+body[data-theme="hunger-games"]
+.window-button:active,
+body[data-theme="hunger-games"]
+.window-control:active {
+  transform: scale(0.88);
+}
+
+
+/* =========================================================
+   ALBUM ART CONTAINER
+   ========================================================= */
+
+body[data-theme="hunger-games"] .artwork-wrapper {
+    position: relative;
+    overflow: visible;
+}
+
+body[data-theme="hunger-games"] .artwork-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: -6.2rem;
+
+    background:
+        url("../assets/frames/hg-frame.png")
+        center / 100% 100%
+        no-repeat;
+
+    pointer-events: none;
+    z-index: 500;
+    transition:
+    opacity 250ms ease,
+    transform 350ms ease;
+}
+body[data-theme="hunger-games"] .artwork-wrapper:hover::after {
+  transform: scale(1.015);
+}
+
+body[data-theme="hunger-games"] .album-artwork,
+body[data-theme="hunger-games"] .artwork-placeholder {
+    position: relative;
+    z-index: 1;
+}
+
+
+body[data-theme="hunger-games"]
+.album-art-container,
+body[data-theme="hunger-games"]
+.artwork-container,
+body[data-theme="hunger-games"]
+.cover-container {
+  position: relative;
+  overflow: hidden;
+
+  border:
+    2px solid var(--hg-border);
+
+  border-radius: 0;
+
+  background: var(--hg-surface-low);
+
+  box-shadow:
+    inset 0 0 25px rgba(0, 0, 0, 0.85),
+    0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Actual image */
+
+body[data-theme="hunger-games"]
+.album-art,
+body[data-theme="hunger-games"]
+#albumArt {
+  border-radius: 0;
+
+  filter:
+    grayscale(1)
+    contrast(1.25)
+    brightness(0.72)
+    sepia(0.12);
+
+  transition:
+    filter 500ms ease,
+    transform 500ms ease;
+}
+
+
+/* Dark, distressed overlay */
+
+body[data-theme="hunger-games"]
+.album-art-container::after,
+body[data-theme="hunger-games"]
+.artwork-container::after,
+body[data-theme="hunger-games"]
+.cover-container::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.72),
+      transparent 58%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 38%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+
+  box-shadow:
+    inset 0 0 32px rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================================
+   TRACK METADATA
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.song-title,
+body[data-theme="hunger-games"]
+#songTitle {
+  color: var(--hg-gold);
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: -0.015em;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 7px rgba(255, 184, 0, 0.32);
+
+  animation:
+    hunger-games-flicker 5s infinite;
+}
+
+
+body[data-theme="hunger-games"]
+.artist-name,
+body[data-theme="hunger-games"]
+#artistName,
+body[data-theme="hunger-games"]
+.artist {
+  color: var(--hg-text-muted);
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+}
+
+
+body[data-theme="hunger-games"]
+.album-name,
+body[data-theme="hunger-games"]
+#albumName,
+body[data-theme="hunger-games"]
+.album {
+  color: var(--hg-text-dark);
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PROGRESS SLIDER
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.progress-slider {
+  width: 100%;
+  height: 6px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border:
+    1px solid var(--hg-border);
+
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--hg-gold) 0%,
+      var(--hg-gold)
+        var(--slider-progress, 0%),
+      var(--hg-surface-high)
+        var(--slider-progress, 0%),
+      var(--hg-surface-high) 100%
+    );
+
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(255, 184, 0, 0.2);
+
+  cursor: pointer;
+}
+
+
+body[data-theme="hunger-games"]
+.progress-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 9px;
+  height: 15px;
+
+  border:
+    1px solid #fff0bd;
+
+  border-radius: 0;
+
+  background:
+    var(--hg-gold);
+
+  box-shadow:
+    0 0 9px rgba(255, 184, 0, 0.65);
+
+  cursor: pointer;
+}
+
+
+/* Firefox support */
+
+body[data-theme="hunger-games"]
+.progress-slider::-moz-range-thumb {
+  width: 9px;
+  height: 15px;
+
+  border:
+    1px solid #fff0bd;
+
+  border-radius: 0;
+
+  background:
+    var(--hg-gold);
+
+  box-shadow:
+    0 0 9px rgba(255, 184, 0, 0.65);
+}
+
+
+/* =========================================================
+   TIME LABELS
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.current-time,
+body[data-theme="hunger-games"]
+.duration,
+body[data-theme="hunger-games"]
+#currentTime,
+body[data-theme="hunger-games"]
+#duration,
+body[data-theme="hunger-games"]
+.time {
+  color: var(--hg-text-dark);
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 10px;
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT CONTROLS
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.control-button,
+body[data-theme="hunger-games"]
+.control-btn,
+body[data-theme="hunger-games"]
+#previousBtn,
+body[data-theme="hunger-games"]
+#nextBtn {
+  border:
+    2px solid var(--hg-border);
+
+  border-radius: 0;
+
+  color: var(--hg-text-muted);
+
+  background:
+    linear-gradient(
+      145deg,
+      #2a2927,
+      #171716
+    );
+
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.06),
+    inset -2px -2px rgba(0, 0, 0, 0.72),
+    0 3px 7px rgba(0, 0, 0, 0.48);
+
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 90ms ease;
+}
+
+
+body[data-theme="hunger-games"]
+.control-button:hover,
+body[data-theme="hunger-games"]
+.control-btn:hover,
+body[data-theme="hunger-games"]
+#previousBtn:hover,
+body[data-theme="hunger-games"]
+#nextBtn:hover {
+  color: var(--hg-gold-light);
+
+  border-color:
+    var(--hg-border-light);
+
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.08),
+    0 0 9px rgba(255, 184, 0, 0.2);
+}
+
+
+body[data-theme="hunger-games"]
+.control-button:active,
+body[data-theme="hunger-games"]
+.control-btn:active,
+body[data-theme="hunger-games"]
+#previousBtn:active,
+body[data-theme="hunger-games"]
+#nextBtn:active {
+  transform: scale(0.9);
+
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================================
+   PLAY / PAUSE BUTTON
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.play-button,
+body[data-theme="hunger-games"]
+#playPauseBtn,
+body[data-theme="hunger-games"]
+#playBtn {
+  border:
+    2px solid var(--hg-gold);
+
+  border-radius: 0;
+
+  color: var(--hg-gold);
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--hg-surface-highest),
+      #181817
+    );
+
+  box-shadow:
+    0 0 12px rgba(255, 184, 0, 0.32),
+    inset 1px 1px rgba(255, 255, 255, 0.08);
+
+  animation:
+    hunger-games-control-pulse
+    2.8s ease-in-out infinite;
+
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    box-shadow 150ms ease,
+    transform 90ms ease;
+}
+
+
+body[data-theme="hunger-games"]
+.play-button:hover,
+body[data-theme="hunger-games"]
+#playPauseBtn:hover,
+body[data-theme="hunger-games"]
+#playBtn:hover {
+  color: var(--hg-gold-light);
+
+  box-shadow:
+    0 0 17px rgba(255, 184, 0, 0.52),
+    inset 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+
+body[data-theme="hunger-games"]
+.play-button:active,
+body[data-theme="hunger-games"]
+#playPauseBtn:active,
+body[data-theme="hunger-games"]
+#playBtn:active {
+  transform: scale(0.93);
+}
+
+
+/* =========================================================
+   STATUS BAR
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.status-bar {
+  border-top:
+    1px solid var(--hg-border);
+
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #111110,
+      #090909
+    );
+}
+
+
+body[data-theme="hunger-games"]
+.status-dot {
+  background:
+    var(--hg-gold);
+
+  box-shadow:
+    0 0 5px rgba(255, 184, 0, 0.9);
+
+  animation:
+    hunger-games-status-pulse
+    1.8s ease-in-out infinite;
+}
+
+
+body[data-theme="hunger-games"]
+.playback-status,
+body[data-theme="hunger-games"]
+#playbackStatus {
+  color: var(--hg-text-dark);
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+/* Right-side sector label */
+
+body[data-theme="hunger-games"]
+.theme-sector-label {
+  display: block;
+
+  color: var(--hg-text-dark);
+
+  opacity: 0.58;
+
+  font-family:
+    "JetBrains Mono",
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   OPTIONAL VOLUME SLIDER
+   ========================================================= */
+
+body[data-theme="hunger-games"]
+.volume-slider {
+  appearance: none;
+  -webkit-appearance: none;
+
+  height: 4px;
+
+  border:
+    1px solid var(--hg-border);
+
+  border-radius: 0;
+
+  background:
+    var(--hg-surface-high);
+}
+
+
+body[data-theme="hunger-games"]
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 7px;
+  height: 12px;
+
+  border: 0;
+  border-radius: 0;
+
+  background:
+    var(--hg-gold-light);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes hunger-games-scanline {
+  from {
+    top: -10px;
+  }
+
+  to {
+    top: calc(100% + 10px);
+  }
+}
+
+
+@keyframes hunger-games-flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    opacity: 1;
+  }
+
+  20%,
+  24%,
+  55% {
+    opacity: 0.72;
+
+    text-shadow:
+      0 0 3px var(--hg-gold);
+  }
+}
+
+
+@keyframes hunger-games-status-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes hunger-games-control-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(255, 184, 0, 0.24),
+      inset 1px 1px rgba(255, 255, 255, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 0 16px rgba(255, 184, 0, 0.52),
+      inset 1px 1px rgba(255, 255, 255, 0.08);
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-theme="hunger-games"]
+  .theme-scanline,
+
+  body[data-theme="hunger-games"]
+  .status-dot,
+
+  body[data-theme="hunger-games"]
+  .song-title,
+
+  body[data-theme="hunger-games"]
+  #songTitle,
+
+  body[data-theme="hunger-games"]
+  .play-button,
+
+  body[data-theme="hunger-games"]
+  #playPauseBtn,
+
+  body[data-theme="hunger-games"]
+  #playBtn {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   1989 ANIMATIONS
+   ========================================================= */
+
+/* Soft shimmer moving across the player */
+@keyframes tv-shimmer {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  85% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+
+/* Gentle title glow instead of flicker */
+@keyframes tv-title-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 4px rgba(125, 211, 252, 0.18);
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px rgba(125, 211, 252, 0.42),
+      0 0 18px rgba(90, 177, 187, 0.18);
+  }
+}
+
+
+/* Status dot breathing */
+@keyframes tv-status-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+
+    box-shadow:
+      0 0 4px rgba(90, 177, 187, 0.35);
+  }
+
+  50% {
+    opacity: 1;
+
+    box-shadow:
+      0 0 10px rgba(90, 177, 187, 0.75);
+  }
+}
+
+
+/* Soft pulse around play button */
+@keyframes tv-control-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px rgba(125, 211, 252, 0.18),
+      inset 1px 1px rgba(255, 255, 255, 0.9);
+  }
+
+  50% {
+    box-shadow:
+      0 0 20px rgba(125, 211, 252, 0.42),
+      0 0 30px rgba(90, 177, 187, 0.14),
+      inset 1px 1px rgba(255, 255, 255, 0.95);
+  }
+}
+
+
+/* Album artwork gently floating */
+@keyframes tv-artwork-float {
+  0%,
+  100% {
+    transform:
+      rotate(2deg)
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      rotate(2deg)
+      translateY(-3px);
+  }
+}
+
+
+/* Very subtle background breathing */
+@keyframes tv-background-breathe {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+
+  50% {
+    opacity: 0.82;
+  }
+}

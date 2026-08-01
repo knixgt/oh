@@ -1,0 +1,17 @@
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\windows-controller.exe
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\windows-controller.deps.json
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\windows-controller.runtimeconfig.json
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\windows-controller.dll
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\windows-controller.pdb
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\Microsoft.Windows.SDK.NET.dll
+C:\Users\Aarush\oh\windows-controller\bin\Debug\net8.0-windows10.0.19041.0\WinRT.Runtime.dll
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.AssemblyInfoInputs.cache
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.AssemblyInfo.cs
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.csproj.CoreCompileInputs.cache
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-.3D63F2FB.Up2Date
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.dll
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\refint\windows-controller.dll
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.pdb
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\windows-controller.genruntimeconfig.cache
+C:\Users\Aarush\oh\windows-controller\obj\Debug\net8.0-windows10.0.19041.0\ref\windows-controller.dll

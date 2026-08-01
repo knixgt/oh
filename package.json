@@ -1,0 +1,19 @@
+{
+  "name": "oh...ohhh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electronmon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^43.1.0",
+    "electronmon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "windows-media-sessions": "^1.0.3"
+  }
+}

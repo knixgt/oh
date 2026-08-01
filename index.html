@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      img-src 'self' data: https:;
+      style-src 'self';
+      script-src 'self';
+    "
+  >
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>OHHH Mini Player</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./themes/hg.css" />
+  <link rel="stylesheet" href="./themes/t19.css" />
+</head>
+
+
+<body>
+  <main class="player">
+    <div class="theme-texture" aria-hidden="true"></div>
+    <div class="theme-scanline" aria-hidden="true"></div>
+
+    <span
+      class="theme-rivet theme-rivet-top-left"
+      aria-hidden="true"
+    ></span>
+
+    <span
+      class="theme-rivet theme-rivet-top-right"
+      aria-hidden="true"
+    ></span>
+
+    <span
+      class="theme-rivet theme-rivet-bottom-left"
+      aria-hidden="true"
+    ></span>
+
+    <span
+      class="theme-rivet theme-rivet-bottom-right"
+      aria-hidden="true"
+    ></span>
+
+    <!-- Custom draggable title bar -->
+    <header class="title-bar">
+      <div class="theme-title">
+        <span class="theme-title-rivet"></span>
+        <span>DISTRICT_AUDIO_FEED</span>
+      </div>
+
+      <div class="window-controls">
+        <button
+          id="minimize-button"
+          class="window-button"
+          aria-label="Minimize"
+        >
+          −
+        </button>
+
+        <button
+          id="close-button"
+          class="window-button close-button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+    </header>
+
+    <!-- Album artwork -->
+    <section class="artwork-section">
+      <div class="artwork-wrapper">
+        <img
+        id="album-artwork"
+        class="album-artwork hidden"
+        alt="Current album artwork"
+        >
+
+        <div id="artwork-placeholder" class="artwork-placeholder hidden">
+          ♪
+        </div>
+      </div>
+    </section>
+
+    <!-- Track details -->
+    <section class="track-details">
+      <h1 id="song-title" title="FE!N">
+        FE!N
+      </h1>
+
+      <p id="artist-name" title="Travis Scott">
+        Travis Scott
+      </p>
+
+      <p id="album-name" title="UTOPIA">
+        UTOPIA
+      </p>
+    </section>
+
+    <!-- Progress -->
+    <section class="progress-section">
+      <input
+        id="progress-slider"
+        class="progress-slider"
+        type="range"
+        min="0"
+        max="100"
+        value="38"
+        aria-label="Song progress"
+      >
+
+      <div class="time-row">
+        <span id="current-time">1:14</span>
+        <span id="duration">3:11</span>
+      </div>
+    </section>
+
+    <!-- Playback buttons -->
+    <section class="playback-controls">
+
+      <button
+        id="previous-button"
+        class="control-button"
+        aria-label="Previous track"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 5h2v14H6zm3 7 9-7v14z"></path>
+        </svg>
+      </button>
+
+      <button
+        id="play-pause-button"
+        class="play-button"
+        aria-label="Play or pause"
+      >
+        <svg
+          id="pause-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M6 5h4v14H6zm8 0h4v14h-4z"></path>
+        </svg>
+
+        <svg
+          id="play-icon"
+          class="hidden"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M8 5v14l11-7z"></path>
+        </svg>
+      </button>
+
+      <button
+        id="next-button"
+        class="control-button"
+        aria-label="Next track"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M16 5h2v14h-2zM6 5l9 7-9 7z"></path>
+        </svg>
+      </button>
+
+    </section>
+
+    <!-- Status -->
+    <footer class="status-row">
+      <span id="status-dot" class="status-dot playing"></span>
+      <span id="playback-status">Playing Through Spotify</span>
+      <span class="theme-sector-label">
+        SECTOR 12
+      </span>
+    </footer>
+
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
