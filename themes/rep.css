@@ -1,0 +1,1297 @@
+/* =========================================================
+   REPUTATION THEME — SMOOTH VERSION
+
+   Activates with:
+   <body data-theme="reputation">
+   ========================================================= */
+
+/* =========================================================
+   THEME VARIABLES
+   ========================================================= */
+
+body[data-theme="reputation"] {
+  --rep-black: #0e0e0e;
+  --rep-background: #131313;
+
+  --rep-surface-low: #1b1b1b;
+  --rep-surface: #1f1f1f;
+  --rep-surface-high: #2a2a2a;
+  --rep-surface-highest: #353535;
+
+  --rep-white: #ffffff;
+  --rep-text: #e2e2e2;
+  --rep-text-muted: #c4c7c8;
+
+  --rep-outline: #8e9192;
+  --rep-outline-dark: #444748;
+
+  --rep-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --rep-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --rep-duration-fast: 260ms;
+  --rep-duration-normal: 460ms;
+  --rep-duration-slow: 700ms;
+
+  color: var(--rep-text);
+
+  background: var(--rep-background);
+
+  transition:
+    color 600ms var(--rep-ease-soft),
+    background-color 700ms var(--rep-ease-soft);
+}
+
+/* =========================================================
+   PLAYER
+   ========================================================= */
+
+body[data-theme="reputation"] .player {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid var(--rep-outline-dark);
+
+  border-radius: 0;
+
+  color: var(--rep-text);
+
+  background: var(--rep-black);
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.72),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.018);
+
+  transition:
+    border-color 600ms var(--rep-ease-soft),
+    background-color 700ms var(--rep-ease-soft),
+    box-shadow 800ms var(--rep-ease);
+}
+
+/* Newspaper texture */
+
+body[data-theme="reputation"] .player::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: url("../assets/backgrounds/rep-back.jpg") center/cover no-repeat;
+
+  opacity: 0.25;
+
+  z-index: 0;
+}
+
+/* Soft vignette */
+
+body[data-theme="reputation"] .player::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 0.9;
+
+  transition: opacity 900ms var(--rep-ease-soft);
+}
+
+/* Player content above texture */
+
+body[data-theme="reputation"] .player > * {
+  position: relative;
+
+  z-index: 2;
+}
+
+/* =========================================================
+   HIDE OTHER THEME ELEMENTS
+   ========================================================= */
+
+body[data-theme="reputation"] .theme-texture,
+body[data-theme="reputation"] .theme-scanline,
+body[data-theme="reputation"] .theme-rivet,
+body[data-theme="reputation"] .theme-sector-label {
+  display: none;
+}
+
+/* =========================================================
+   TITLE BAR
+   ========================================================= */
+
+body[data-theme="reputation"] .title-bar {
+  position: relative;
+
+  z-index: 50;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  width: 100%;
+
+  border-bottom: 4px double var(--rep-outline);
+
+  border-radius: 0;
+
+  background: rgba(19, 19, 19, 0.9);
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.42);
+
+  transition:
+    background-color 700ms var(--rep-ease-soft),
+    border-color 700ms var(--rep-ease-soft),
+    box-shadow 700ms var(--rep-ease-soft);
+}
+
+/* =========================================================
+   REPUTATION HEADER
+   ========================================================= */
+
+body[data-theme="reputation"] .theme-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--rep-white);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+
+  opacity: 0.86;
+
+  transition:
+    opacity 500ms var(--rep-ease-soft),
+    letter-spacing 650ms var(--rep-ease),
+    color 500ms var(--rep-ease-soft);
+}
+
+body[data-theme="reputation"] .theme-title:hover {
+  opacity: 1;
+
+  letter-spacing: 0.24em;
+}
+
+body[data-theme="reputation"] .theme-title-rivet {
+  display: none;
+}
+
+/* Hide original text visually */
+
+body[data-theme="reputation"] .theme-title span:last-child {
+  position: relative;
+
+  width: 92px;
+
+  color: transparent;
+}
+
+/* Replacement heading */
+
+body[data-theme="reputation"] .theme-title span:last-child::after {
+  content: "REPUTATION";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 50%;
+
+  color: var(--rep-white);
+
+  transform: translateY(-50%);
+
+  white-space: nowrap;
+}
+
+/* Decorative lines */
+
+body[data-theme="reputation"] .theme-title::before,
+body[data-theme="reputation"] .theme-title::after {
+  content: "";
+
+  width: 16px;
+
+  height: 1px;
+
+  flex-shrink: 0;
+
+  background: var(--rep-outline);
+
+  transform: scaleX(1);
+
+  transition:
+    width 600ms var(--rep-ease),
+    background-color 500ms ease,
+    transform 600ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .theme-title:hover::before,
+body[data-theme="reputation"] .theme-title:hover::after {
+  width: 22px;
+
+  background: var(--rep-white);
+}
+
+/* =========================================================
+   WINDOW CONTROLS
+   ========================================================= */
+
+body[data-theme="reputation"] .window-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  margin-left: auto;
+
+  opacity: 1;
+
+  visibility: visible;
+
+  -webkit-app-region: no-drag;
+}
+
+body[data-theme="reputation"] .window-button {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 25px;
+
+  height: 25px;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+
+  border-radius: 0;
+
+  color: var(--rep-outline);
+
+  background: rgba(255, 255, 255, 0);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transform: translateY(0) scale(1);
+
+  -webkit-app-region: no-drag;
+
+  will-change: transform;
+
+  transition:
+    transform 500ms var(--rep-ease),
+    color 420ms var(--rep-ease-soft),
+    background-color 500ms var(--rep-ease-soft),
+    border-color 500ms var(--rep-ease-soft),
+    box-shadow 550ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .window-button:hover {
+  color: var(--rep-black);
+
+  border-color: rgba(255, 255, 255, 0.94);
+
+  background: rgba(255, 255, 255, 0.94);
+
+  transform: translateY(-1px) scale(1.06);
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.32);
+}
+
+body[data-theme="reputation"] .window-button:active {
+  transform: translateY(0) scale(0.94);
+
+  transition:
+    transform 240ms var(--rep-ease-soft),
+    box-shadow 240ms var(--rep-ease-soft);
+}
+
+body[data-theme="reputation"] #close-button:hover {
+  color: var(--rep-black);
+
+  background: rgba(255, 255, 255, 0.94);
+}
+
+/* =========================================================
+   ARTWORK SECTION
+   ========================================================= */
+
+body[data-theme="reputation"] .artwork-section {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 0;
+
+  border-bottom: 1px solid var(--rep-outline-dark);
+
+  transition: border-color 700ms var(--rep-ease-soft);
+}
+
+/* =========================================================
+   ARTWORK WRAPPER
+   ========================================================= */
+
+body[data-theme="reputation"] .artwork-wrapper {
+  position: relative;
+
+  width: min(100%, 315px);
+
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  border: 1px solid var(--rep-outline-dark);
+
+  border-radius: 0;
+
+  background: var(--rep-surface-low);
+
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+
+  transform: translateY(0) scale(1);
+
+  will-change: transform;
+
+  transition:
+    transform 900ms var(--rep-ease),
+    border-color 700ms var(--rep-ease-soft),
+    background-color 700ms var(--rep-ease-soft),
+    box-shadow 900ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .artwork-wrapper:hover {
+  border-color: rgba(255, 255, 255, 0.58);
+
+  transform: translateY(-3px) scale(1.006);
+
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.38),
+    0 0 26px rgba(255, 255, 255, 0.045);
+}
+
+/* =========================================================
+   ALBUM ARTWORK
+   ========================================================= */
+
+body[data-theme="reputation"] #album-artwork {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 0;
+
+  filter: grayscale(0.82) brightness(0.72) contrast(1.14);
+
+  transform: scale(1);
+
+  transform-origin: center;
+
+  will-change: transform, filter;
+
+  transition:
+    filter 1100ms var(--rep-ease-soft),
+    transform 1300ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .artwork-wrapper:hover #album-artwork {
+  filter: grayscale(0.12) brightness(0.94) contrast(1.08);
+
+  transform: scale(1.035);
+}
+
+/* Pinstripe texture */
+
+body[data-theme="reputation"] .artwork-wrapper::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.04) 3px,
+    rgba(255, 255, 255, 0.04) 4px
+  );
+
+  opacity: 0.3;
+
+  pointer-events: none;
+
+  z-index: 3;
+
+  transition: opacity 1000ms var(--rep-ease-soft);
+}
+
+body[data-theme="reputation"] .artwork-wrapper:hover::before {
+  opacity: 0.16;
+}
+
+/* LIVE SCAN label */
+
+body[data-theme="reputation"] .artwork-wrapper::after {
+  content: "●  LIVE SCAN";
+
+  position: absolute;
+
+  left: 12px;
+
+  bottom: 12px;
+
+  padding: 5px 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  color: var(--rep-white);
+
+  background: rgba(14, 14, 14, 0.78);
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  pointer-events: none;
+
+  z-index: 4;
+
+  opacity: 0.7;
+
+  transform: translateY(0);
+
+  animation: reputation-live-breathe 4.5s ease-in-out infinite;
+
+  transition:
+    opacity 700ms var(--rep-ease-soft),
+    transform 700ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .artwork-wrapper:hover::after {
+  opacity: 1;
+
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   ARTWORK PLACEHOLDER
+   ========================================================= */
+
+body[data-theme="reputation"] #artwork-placeholder {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 0;
+
+  color: var(--rep-outline);
+
+  background: var(--rep-surface-low);
+
+  font-family: "UnifrakturMaguntia", Georgia, serif;
+
+  font-size: 54px;
+
+  transition:
+    color 700ms var(--rep-ease-soft),
+    background-color 700ms var(--rep-ease-soft);
+}
+
+/* =========================================================
+   TRACK DETAILS
+   ========================================================= */
+
+body[data-theme="reputation"] .track-details {
+  position: relative;
+
+  padding-top: 12px;
+
+  text-align: center;
+}
+
+/* Newspaper metadata */
+
+body[data-theme="reputation"] .track-details::before {
+  content: "TRACK 01                                      2017";
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--rep-outline);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 8px;
+
+  line-height: 1;
+
+  letter-spacing: 0.03em;
+
+  white-space: pre;
+
+  opacity: 0.68;
+
+  transition:
+    opacity 600ms ease,
+    letter-spacing 800ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .track-details:hover::before {
+  opacity: 0.9;
+
+  letter-spacing: 0.045em;
+}
+
+/* =========================================================
+   SONG TITLE
+   ========================================================= */
+
+body[data-theme="reputation"] #song-title {
+  color: var(--rep-white);
+
+  font-family: "UnifrakturMaguntia", "Times New Roman", serif;
+
+  font-size: 30px;
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.02em;
+
+  text-align: center;
+
+  text-transform: none;
+
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.65);
+
+  transform: translateY(0) scale(1);
+
+  transition:
+    color 550ms var(--rep-ease-soft),
+    transform 750ms var(--rep-ease),
+    text-shadow 700ms var(--rep-ease-soft),
+    letter-spacing 750ms var(--rep-ease),
+    text-decoration-color 600ms ease;
+}
+
+body[data-theme="reputation"] #song-title:hover {
+  color: var(--rep-white);
+
+  letter-spacing: -0.005em;
+
+  transform: translateY(-2px) scale(1.015);
+
+  text-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.8),
+    0 0 18px rgba(255, 255, 255, 0.08);
+
+  text-decoration: line-through;
+
+  text-decoration-thickness: 1px;
+
+  text-decoration-color: rgba(255, 255, 255, 0.65);
+}
+
+/* =========================================================
+   ARTIST
+   ========================================================= */
+
+body[data-theme="reputation"] #artist-name {
+  color: var(--rep-outline);
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+
+  text-align: center;
+
+  opacity: 1;
+
+  transition:
+    color 550ms ease,
+    letter-spacing 700ms var(--rep-ease),
+    opacity 550ms ease;
+}
+
+body[data-theme="reputation"] #artist-name:hover {
+  color: var(--rep-text);
+
+  letter-spacing: 0.23em;
+}
+
+/* =========================================================
+   ALBUM NAME
+   ========================================================= */
+
+body[data-theme="reputation"] #album-name {
+  color: rgba(196, 199, 200, 0.55);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 8px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  text-align: center;
+
+  transition:
+    color 550ms ease,
+    letter-spacing 700ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] #album-name:hover {
+  color: rgba(226, 226, 226, 0.82);
+
+  letter-spacing: 0.15em;
+}
+
+/* =========================================================
+   PROGRESS SECTION
+   ========================================================= */
+
+body[data-theme="reputation"] .progress-section {
+  position: relative;
+
+  margin-top: 8px;
+}
+
+/* =========================================================
+   PROGRESS SLIDER
+   ========================================================= */
+
+body[data-theme="reputation"] #progress-slider {
+  width: 100%;
+
+  height: 14px;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  opacity: 0.84;
+
+  transition:
+    opacity 600ms ease,
+    filter 600ms ease;
+}
+
+body[data-theme="reputation"] #progress-slider:hover {
+  opacity: 1;
+
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.14));
+}
+
+/* Electron / Chromium track */
+
+body[data-theme="reputation"] #progress-slider::-webkit-slider-runnable-track {
+  height: 2px;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: linear-gradient(
+    to right,
+
+    var(--rep-white) 0%,
+
+    var(--rep-white) var(--slider-progress, 0%),
+    var(--rep-surface-highest) var(--slider-progress, 0%),
+    var(--rep-surface-highest) 100%
+  );
+
+  box-shadow: none;
+}
+
+/* Electron / Chromium thumb */
+
+body[data-theme="reputation"] #progress-slider::-webkit-slider-thumb {
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  width: 2px;
+
+  height: 14px;
+
+  margin-top: -6px;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: var(--rep-white);
+
+  box-shadow: 3px 0 5px rgba(255, 255, 255, 0.38);
+
+  cursor: ew-resize;
+
+  transform: scaleY(1);
+
+  transition:
+    transform 600ms var(--rep-ease),
+    box-shadow 600ms var(--rep-ease-soft),
+    background-color 600ms ease;
+}
+
+body[data-theme="reputation"] #progress-slider:hover::-webkit-slider-thumb {
+  transform: scaleY(1.35);
+
+  box-shadow: 4px 0 9px rgba(255, 255, 255, 0.68);
+}
+
+body[data-theme="reputation"] #progress-slider:active::-webkit-slider-thumb {
+  transform: scaleY(1.18);
+
+  transition-duration: 300ms;
+}
+
+/* Firefox track */
+
+body[data-theme="reputation"] #progress-slider::-moz-range-track {
+  height: 2px;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: var(--rep-surface-highest);
+}
+
+/* Firefox fill */
+
+body[data-theme="reputation"] #progress-slider::-moz-range-progress {
+  height: 2px;
+
+  background: var(--rep-white);
+}
+
+/* Firefox thumb */
+
+body[data-theme="reputation"] #progress-slider::-moz-range-thumb {
+  width: 2px;
+
+  height: 14px;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: var(--rep-white);
+
+  box-shadow: 3px 0 5px rgba(255, 255, 255, 0.38);
+
+  transition:
+    transform 600ms var(--rep-ease),
+    box-shadow 600ms var(--rep-ease-soft);
+}
+
+/* =========================================================
+   TIME LABELS
+   ========================================================= */
+
+body[data-theme="reputation"] .time-row {
+  color: var(--rep-outline);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 9px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.02em;
+
+  transition:
+    color 550ms ease,
+    opacity 550ms ease;
+}
+
+body[data-theme="reputation"] #current-time,
+body[data-theme="reputation"] #duration {
+  color: var(--rep-outline);
+
+  transition: color 550ms ease;
+}
+
+/* =========================================================
+   PLAYBACK CONTROLS
+   ========================================================= */
+
+body[data-theme="reputation"] .playback-controls {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 32px;
+}
+
+/* =========================================================
+   PREVIOUS / NEXT BUTTONS
+   ========================================================= */
+
+body[data-theme="reputation"] .control-button {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid transparent;
+
+  border-radius: 0;
+
+  color: var(--rep-outline);
+
+  background: rgba(255, 255, 255, 0);
+
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+
+  transform: translateY(0) scale(1);
+
+  cursor: pointer;
+
+  will-change: transform;
+
+  transition:
+    color 500ms var(--rep-ease-soft),
+    background-color 600ms var(--rep-ease-soft),
+    border-color 600ms var(--rep-ease-soft),
+    transform 700ms var(--rep-ease),
+    box-shadow 700ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] .control-button:hover {
+  color: var(--rep-black);
+
+  border-color: rgba(255, 255, 255, 0.92);
+
+  background: rgba(255, 255, 255, 0.92);
+
+  transform: translateY(-2px) scale(1.055);
+
+  box-shadow:
+    0 9px 22px rgba(0, 0, 0, 0.32),
+    0 0 15px rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="reputation"] .control-button:active {
+  transform: translateY(0) scale(0.94);
+
+  background: rgba(226, 226, 226, 0.9);
+
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.16);
+
+  transition:
+    transform 300ms var(--rep-ease-soft),
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* Control icons */
+
+body[data-theme="reputation"] .control-button svg {
+  fill: currentColor;
+
+  transform: translateX(0) scale(1);
+
+  transform-origin: center;
+
+  transition:
+    transform 700ms var(--rep-ease),
+    filter 650ms var(--rep-ease-soft);
+}
+
+body[data-theme="reputation"] #previous-button:hover svg {
+  transform: translateX(-1px) scale(1.08);
+
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+body[data-theme="reputation"] #next-button:hover svg {
+  transform: translateX(1px) scale(1.08);
+
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* =========================================================
+   PLAY / PAUSE BUTTON
+   ========================================================= */
+
+body[data-theme="reputation"] #play-pause-button {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid var(--rep-white);
+
+  border-radius: 0;
+
+  color: var(--rep-black);
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.42),
+    0 0 0 rgba(255, 255, 255, 0);
+
+  transform: translateY(0) scale(1);
+
+  cursor: pointer;
+
+  will-change: transform;
+
+  animation: reputation-play-breathe 6s ease-in-out infinite;
+
+  transition:
+    color 550ms var(--rep-ease-soft),
+    background-color 650ms var(--rep-ease-soft),
+    border-color 650ms var(--rep-ease-soft),
+    transform 750ms var(--rep-ease),
+    box-shadow 800ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] #play-pause-button:hover {
+  color: var(--rep-white);
+
+  background: rgba(14, 14, 14, 0.96);
+
+  transform: translateY(-3px) scale(1.07);
+
+  box-shadow:
+    0 13px 30px rgba(0, 0, 0, 0.58),
+    0 0 0 1px rgba(255, 255, 255, 0.28),
+    0 0 20px rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="reputation"] #play-pause-button:active {
+  transform: translateY(0) scale(0.94);
+
+  box-shadow:
+    inset 0 3px 9px rgba(255, 255, 255, 0.07),
+    0 4px 10px rgba(0, 0, 0, 0.42);
+
+  transition:
+    transform 320ms var(--rep-ease-soft),
+    box-shadow 320ms ease;
+}
+
+/* Play icon */
+
+body[data-theme="reputation"] #play-pause-button svg {
+  fill: currentColor;
+
+  transform: scale(1);
+
+  transform-origin: center;
+
+  transition:
+    transform 700ms var(--rep-ease),
+    filter 650ms var(--rep-ease-soft);
+}
+
+body[data-theme="reputation"] #play-pause-button:hover svg {
+  transform: scale(1.09);
+
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.12));
+}
+
+body[data-theme="reputation"] #play-pause-button:active svg {
+  transform: scale(0.97);
+
+  transition-duration: 300ms;
+}
+
+/* =========================================================
+   STATUS ROW
+   ========================================================= */
+
+body[data-theme="reputation"] .status-row {
+  border-top: 1px solid var(--rep-outline-dark);
+
+  border-radius: 0;
+
+  color: var(--rep-outline);
+
+  background: var(--rep-black);
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  letter-spacing: 0.08em;
+
+  transition:
+    color 600ms ease,
+    background-color 700ms var(--rep-ease-soft),
+    border-color 700ms var(--rep-ease-soft);
+}
+
+/* =========================================================
+   STATUS DOT
+   ========================================================= */
+
+body[data-theme="reputation"] #status-dot {
+  width: 5px;
+
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--rep-white);
+
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 0 8px rgba(255, 255, 255, 0.5);
+
+  transition:
+    background-color 600ms ease,
+    box-shadow 700ms ease,
+    opacity 700ms ease,
+    transform 700ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] #status-dot.playing {
+  background: var(--rep-white);
+
+  animation: reputation-status-breathe 4s ease-in-out infinite;
+}
+
+body[data-theme="reputation"] #status-dot.paused {
+  background: var(--rep-outline);
+
+  box-shadow: 0 0 0 2px rgba(142, 145, 146, 0.06);
+
+  animation: none;
+
+  opacity: 0.65;
+
+  transform: scale(0.9);
+}
+
+/* =========================================================
+   PLAYBACK STATUS
+   ========================================================= */
+
+body[data-theme="reputation"] #playback-status {
+  position: relative;
+
+  color: transparent;
+
+  font-family: "JetBrains Mono", Consolas, monospace;
+
+  font-size: 8px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+body[data-theme="reputation"] #playback-status::after {
+  content: "SECURE_LINK";
+
+  position: absolute;
+
+  left: 0;
+
+  color: var(--rep-outline);
+
+  white-space: nowrap;
+
+  opacity: 0.8;
+
+  transition:
+    color 600ms ease,
+    opacity 600ms ease,
+    letter-spacing 700ms var(--rep-ease);
+}
+
+body[data-theme="reputation"] #playback-status:hover::after {
+  color: var(--rep-text);
+
+  opacity: 1;
+
+  letter-spacing: 0.13em;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes reputation-texture-breathe {
+  0%,
+  100% {
+    opacity: 0.76;
+  }
+
+  50% {
+    opacity: 0.88;
+  }
+}
+
+@keyframes reputation-live-breathe {
+  0%,
+  100% {
+    opacity: 0.62;
+
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    opacity: 0.95;
+
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
+  }
+}
+
+@keyframes reputation-play-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.42),
+      0 0 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.46),
+      0 0 16px rgba(255, 255, 255, 0.055);
+  }
+}
+
+@keyframes reputation-status-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+
+    transform: scale(0.92);
+
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.05),
+      0 0 5px rgba(255, 255, 255, 0.24);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform: scale(1.08);
+
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.09),
+      0 0 11px rgba(255, 255, 255, 0.62);
+  }
+}
+
+/* =========================================================
+   GENERAL BUTTONS
+   ========================================================= */
+
+body[data-theme="reputation"] button {
+  cursor: pointer;
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-theme="reputation"] .player::before,
+  body[data-theme="reputation"] .artwork-wrapper::after,
+  body[data-theme="reputation"] #play-pause-button,
+  body[data-theme="reputation"] #status-dot {
+    animation: none;
+  }
+
+  body[data-theme="reputation"] *,
+  body[data-theme="reputation"] *::before,
+  body[data-theme="reputation"] *::after {
+    transition-duration: 1ms !important;
+
+    animation-duration: 1ms !important;
+
+    animation-iteration-count: 1 !important;
+  }
+}

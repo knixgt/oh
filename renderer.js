@@ -1,53 +1,36 @@
-const albumArtwork =
-  document.getElementById("album-artwork");
+const albumArtwork = document.getElementById("album-artwork");
 
-const artworkPlaceholder =
-  document.getElementById("artwork-placeholder");
+const artworkPlaceholder = document.getElementById("artwork-placeholder");
 
-const songTitle =
-  document.getElementById("song-title");
+const songTitle = document.getElementById("song-title");
 
-const artistName =
-  document.getElementById("artist-name");
+const artistName = document.getElementById("artist-name");
 
-const albumName =
-  document.getElementById("album-name");
+const albumName = document.getElementById("album-name");
 
-const progressSlider =
-  document.getElementById("progress-slider");
+const progressSlider = document.getElementById("progress-slider");
 
-const currentTime =
-  document.getElementById("current-time");
+const currentTime = document.getElementById("current-time");
 
-const duration =
-  document.getElementById("duration");
+const duration = document.getElementById("duration");
 
-const previousButton =
-  document.getElementById("previous-button");
+const previousButton = document.getElementById("previous-button");
 
-const playPauseButton =
-  document.getElementById("play-pause-button");
+const playPauseButton = document.getElementById("play-pause-button");
 
-const nextButton =
-  document.getElementById("next-button");
+const nextButton = document.getElementById("next-button");
 
-const playIcon =
-  document.getElementById("play-icon");
+const playIcon = document.getElementById("play-icon");
 
-const pauseIcon =
-  document.getElementById("pause-icon");
+const pauseIcon = document.getElementById("pause-icon");
 
-const playbackStatus =
-  document.getElementById("playback-status");
+const playbackStatus = document.getElementById("playback-status");
 
-const statusDot =
-  document.getElementById("status-dot");
+const statusDot = document.getElementById("status-dot");
 
-const minimizeButton =
-  document.getElementById("minimize-button");
+const minimizeButton = document.getElementById("minimize-button");
 
-const closeButton =
-  document.getElementById("close-button");
+const closeButton = document.getElementById("close-button");
 
 let latestSession = null;
 
@@ -56,24 +39,16 @@ let lastPositionUpdateTime = 0;
 let isDraggingProgress = false;
 
 function formatTime(milliseconds) {
-  if (
-    !Number.isFinite(milliseconds) ||
-    milliseconds < 0
-  ) {
+  if (!Number.isFinite(milliseconds) || milliseconds < 0) {
     return "0:00";
   }
 
-  const totalSeconds = Math.floor(
-    milliseconds / 1000,
-  );
+  const totalSeconds = Math.floor(milliseconds / 1000);
 
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
 
-  return `${minutes}:${String(seconds).padStart(
-    2,
-    "0",
-  )}`;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
 function normalizeThemeText(value = "") {
@@ -87,16 +62,9 @@ function normalizeThemeText(value = "") {
 function isHungerGamesTrack(session) {
   const title = normalizeThemeText(session?.title);
 
-  const album = normalizeThemeText(
-    session?.albumTitle ||
-    session?.album ||
-    ""
-  );
+  const album = normalizeThemeText(session?.albumTitle || session?.album || "");
 
-  const artist = normalizeThemeText(
-    session?.artist ||
-    ""
-  );
+  const artist = normalizeThemeText(session?.artist || "");
 
   const hungerGamesAlbumTerms = [
     "hunger games",
@@ -122,45 +90,28 @@ function isHungerGamesTrack(session) {
     "pure as the driven snow",
   ];
 
-  const albumMatches = hungerGamesAlbumTerms.some(
-    (term) => album.includes(term)
+  const albumMatches = hungerGamesAlbumTerms.some((term) =>
+    album.includes(term),
   );
 
-  const songMatches = hungerGamesSongs.some(
-    (song) => title.includes(song)
-  );
+  const songMatches = hungerGamesSongs.some((song) => title.includes(song));
 
   const soundtrackArtistMatches =
     artist.includes("james newton howard") &&
-    (
-      album.includes("hunger games") ||
+    (album.includes("hunger games") ||
       album.includes("mockingjay") ||
-      album.includes("catching fire")
-    );
+      album.includes("catching fire"));
 
-  return (
-    albumMatches ||
-    songMatches ||
-    soundtrackArtistMatches
-  );
+  return albumMatches || songMatches || soundtrackArtistMatches;
 }
 
-
 function is1989Track(session) {
-  const album = normalizeThemeText(
-    session?.albumTitle ||
-    session?.album ||
-    ""
-  );
+  const album = normalizeThemeText(session?.albumTitle || session?.album || "");
 
-  const artist = normalizeThemeText(
-    session?.artist ||
-    ""
-  );
+  const artist = normalizeThemeText(session?.artist || "");
 
   const isTaylorsVersion =
-    album.includes("taylor's version") ||
-    album.includes("taylors version");
+    album.includes("taylor's version") || album.includes("taylors version");
 
   return (
     artist.includes("taylor swift") &&
@@ -170,7 +121,6 @@ function is1989Track(session) {
 }
 
 function getThemeForTrack(session) {
-
   if (isHungerGamesTrack(session)) {
     return "hunger-games";
   }
@@ -179,7 +129,7 @@ function getThemeForTrack(session) {
     return "1989";
   }
 
-  return "default";
+  return "reputation";
 }
 
 function applyTrackTheme(session) {
@@ -190,16 +140,12 @@ function applyTrackTheme(session) {
   console.log("Applied player theme:", theme);
 }
 
-
 function updateProgressAppearance() {
   const min = Number(progressSlider.min);
   const max = Number(progressSlider.max);
   const value = Number(progressSlider.value);
 
-  const percentage =
-    max > min
-      ? ((value - min) / (max - min)) * 100
-      : 0;
+  const percentage = max > min ? ((value - min) / (max - min)) * 100 : 0;
 
   document.documentElement.style.setProperty(
     "--slider-progress",
@@ -221,15 +167,12 @@ function showArtwork(thumbnail) {
 }
 
 function setControlAvailability(session) {
-  previousButton.disabled =
-    !session?.controls?.canSkipPrevious;
+  previousButton.disabled = !session?.controls?.canSkipPrevious;
 
-  nextButton.disabled =
-    !session?.controls?.canSkipNext;
+  nextButton.disabled = !session?.controls?.canSkipNext;
 
   const canTogglePlayback =
-    session?.controls?.canPlay ||
-    session?.controls?.canPause;
+    session?.controls?.canPlay || session?.controls?.canPause;
 
   playPauseButton.disabled = !canTogglePlayback;
 }
@@ -244,8 +187,7 @@ function showNoSpotifySession() {
   showArtwork(null);
 
   songTitle.textContent = "Spotify not detected";
-  artistName.textContent =
-    "Start playing something in Spotify";
+  artistName.textContent = "Start playing something in Spotify";
   albumName.textContent = "";
 
   progressSlider.min = "0";
@@ -258,18 +200,15 @@ function showNoSpotifySession() {
   playIcon.classList.remove("hidden");
   pauseIcon.classList.add("hidden");
 
-  statusDot.className =
-    "status-dot disconnected";
+  statusDot.className = "status-dot disconnected";
 
-  playbackStatus.textContent =
-    "Waiting for Spotify";
+  playbackStatus.textContent = "Waiting for Spotify";
 
   setControlAvailability(null);
   updateProgressAppearance();
 }
 
 function renderSpotifySession(session) {
-
   if (!session) {
     showNoSpotifySession();
     return;
@@ -279,32 +218,23 @@ function renderSpotifySession(session) {
 
   applyTrackTheme(session);
 
-  songTitle.textContent =
-    session.title || "Unknown song";
+  songTitle.textContent = session.title || "Unknown song";
 
   songTitle.title = session.title || "";
 
-  artistName.textContent =
-    session.artist || "Unknown artist";
+  artistName.textContent = session.artist || "Unknown artist";
 
   artistName.title = session.artist || "";
 
-  albumName.textContent =
-    session.albumTitle || "";
+  albumName.textContent = session.albumTitle || "";
 
   albumName.title = session.albumTitle || "";
 
   showArtwork(session.thumbnail);
 
-  const position = Math.max(
-    0,
-    session.positionMs || 0,
-  );
+  const position = Math.max(0, session.positionMs || 0);
 
-  const trackDuration = Math.max(
-    0,
-    session.durationMs || 0,
-  );
+  const trackDuration = Math.max(0, session.durationMs || 0);
 
   if (!isDraggingProgress) {
     displayedPositionMs = position;
@@ -312,37 +242,25 @@ function renderSpotifySession(session) {
   }
 
   progressSlider.min = "0";
-  progressSlider.max = String(
-    Math.max(trackDuration, 1),
-  );
+  progressSlider.max = String(Math.max(trackDuration, 1));
 
   if (!isDraggingProgress) {
     progressSlider.value = String(
       Math.min(displayedPositionMs, trackDuration || 0),
     );
 
-    currentTime.textContent =
-      formatTime(displayedPositionMs);
+    currentTime.textContent = formatTime(displayedPositionMs);
   }
 
   duration.textContent = formatTime(trackDuration);
 
-  const isPlaying =
-    session.playbackStatus === "playing";
+  const isPlaying = session.playbackStatus === "playing";
 
-  playIcon.classList.toggle(
-    "hidden",
-    isPlaying,
-  );
+  playIcon.classList.toggle("hidden", isPlaying);
 
-  pauseIcon.classList.toggle(
-    "hidden",
-    !isPlaying,
-  );
+  pauseIcon.classList.toggle("hidden", !isPlaying);
 
-  statusDot.className = isPlaying
-    ? "status-dot playing"
-    : "status-dot paused";
+  statusDot.className = isPlaying ? "status-dot playing" : "status-dot paused";
 
   playbackStatus.textContent = isPlaying
     ? "Playing through Spotify"
@@ -360,11 +278,9 @@ function updateSmoothProgress() {
   ) {
     const now = performance.now();
 
-    const elapsed =
-      now - lastPositionUpdateTime;
+    const elapsed = now - lastPositionUpdateTime;
 
-    const trackDuration =
-      latestSession.durationMs || 0;
+    const trackDuration = latestSession.durationMs || 0;
 
     displayedPositionMs = Math.min(
       displayedPositionMs + elapsed,
@@ -373,11 +289,9 @@ function updateSmoothProgress() {
 
     lastPositionUpdateTime = now;
 
-    progressSlider.value =
-      String(displayedPositionMs);
+    progressSlider.value = String(displayedPositionMs);
 
-    currentTime.textContent =
-      formatTime(displayedPositionMs);
+    currentTime.textContent = formatTime(displayedPositionMs);
 
     updateProgressAppearance();
   }
@@ -397,15 +311,13 @@ closeButton.addEventListener("click", () => {
   window.electronAPI.closeWindow();
 });
 
-
 async function sendSpotifyCommand(command) {
   previousButton.disabled = true;
   playPauseButton.disabled = true;
   nextButton.disabled = true;
 
   try {
-    const result =
-      await window.electronAPI.controlSpotify(command);
+    const result = await window.electronAPI.controlSpotify(command);
 
     if (!result.success) {
       throw new Error(result.error);
@@ -416,16 +328,11 @@ async function sendSpotifyCommand(command) {
       Spotify state back to the renderer.
     */
   } catch (error) {
-    console.error(
-      `Spotify command '${command}' failed:`,
-      error,
-    );
+    console.error(`Spotify command '${command}' failed:`, error);
 
-    playbackStatus.textContent =
-      error.message || "Spotify control failed";
+    playbackStatus.textContent = error.message || "Spotify control failed";
 
-    statusDot.className =
-      "status-dot disconnected";
+    statusDot.className = "status-dot disconnected";
   } finally {
     /*
       Re-enable according to the last session capabilities.
@@ -453,53 +360,34 @@ progressSlider.addEventListener("pointerdown", () => {
 progressSlider.addEventListener("input", () => {
   isDraggingProgress = true;
 
-  displayedPositionMs =
-    Number(progressSlider.value);
+  displayedPositionMs = Number(progressSlider.value);
 
-  currentTime.textContent =
-    formatTime(displayedPositionMs);
+  currentTime.textContent = formatTime(displayedPositionMs);
 
   updateProgressAppearance();
 });
 
-progressSlider.addEventListener(
-  "change",
-  async () => {
-    const newPosition =
-      Number(progressSlider.value);
+progressSlider.addEventListener("change", async () => {
+  const newPosition = Number(progressSlider.value);
 
-    displayedPositionMs =
-      newPosition;
+  displayedPositionMs = newPosition;
 
-    lastPositionUpdateTime =
-      performance.now();
+  lastPositionUpdateTime = performance.now();
 
-    try {
-      const result =
-        await window.electronAPI.seekSpotify(
-          newPosition,
-        );
+  try {
+    const result = await window.electronAPI.seekSpotify(newPosition);
 
-      if (!result.success) {
-        throw new Error(
-          result.error ||
-          "Spotify seek failed",
-        );
-      }
-    } catch (error) {
-      console.error(
-        "Could not seek Spotify:",
-        error,
-      );
-
-      playbackStatus.textContent =
-        error.message ||
-        "Could not seek Spotify";
-    } finally {
-      isDraggingProgress = false;
+    if (!result.success) {
+      throw new Error(result.error || "Spotify seek failed");
     }
-  },
-);
+  } catch (error) {
+    console.error("Could not seek Spotify:", error);
+
+    playbackStatus.textContent = error.message || "Could not seek Spotify";
+  } finally {
+    isDraggingProgress = false;
+  }
+});
 
 /* Initial state */
 
@@ -509,20 +397,14 @@ window.electronAPI
   .getCurrentSpotifySession()
   .then(renderSpotifySession)
   .catch((error) => {
-    console.error(
-      "Initial Spotify session request failed:",
-      error,
-    );
+    console.error("Initial Spotify session request failed:", error);
 
     showNoSpotifySession();
   });
 
-window.electronAPI.onSpotifySessionUpdated(
-  renderSpotifySession,
-);
+window.electronAPI.onSpotifySessionUpdated(renderSpotifySession);
 
 window.electronAPI.onSpotifyError((message) => {
   playbackStatus.textContent = message;
-  statusDot.className =
-    "status-dot disconnected";
+  statusDot.className = "status-dot disconnected";
 });
